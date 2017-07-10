@@ -1,0 +1,62 @@
+<form (submit)="getWines()">
+  <input type="text" placeholder="title" name="title" [(ngModel)] = "title">
+  <input type="text" placeholder="wine" name="wine" [(ngModel)] = "wine">
+  <input type="text" placeholder="original_id" name="original_id" [(ngModel)] = "original_id">
+  <input type="text" placeholder="wine_type" name="wine_type" [(ngModel)] = "wine_type">
+  <input type="text" placeholder="varietal" name="varietal" [(ngModel)] = "varietal">
+<!--  <input type="text" placeholder="country_tid" name="country_tid" [(ngModel)] = "country_tid">-->
+  <input type="submit" value="submit" class="btn btn-primary">
+</form>
+<h4 *ngIf="data">Not unique wines</h4>
+  <table class="table table-striped table-lg mt-lg mb-0 scroll" *ngIf="data">
+    <thead class="no-bd">
+    <tr>
+      <th class="text-long">Title</th>
+      <th >Wine</th>
+      <th class="text-long">Original_id</th>
+      <th>Wine_type</th>
+      <th>Varietal</th>
+
+    <!--  <th><input type="text" placeholder="id" class="text-medium"></th>
+      <th><input type="submit" value="submit"></th> -->
+    </tr>
+    </thead>
+    <tbody >
+      <tr  *ngFor="let item of data.not_unique_wines" (click)="navigate(item.wineid,'wine?wine_id=')">
+
+        <td class="text-long">{{item.title}}</td>
+        <td >{{item.wine}}</td>
+        <td class="text-long">{{item.original_id}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.varietal}}</td>
+
+
+      </tr>
+    </tbody>
+  </table>
+<h4 *ngIf="data">Unique wines</h4>
+  <table class="table table-striped table-lg mt-lg mb-0 scroll" *ngIf="data">
+    <thead class="no-bd">
+    <tr>
+      <th class="text-long">Title</th>
+      <th >Wine</th>
+      <th class="text-long">Original_id</th>
+      <th>Wine_type</th>
+      <th>Varietal</th>
+
+    <!--  <th><input type="text" placeholder="id" class="text-medium"></th>
+      <th><input type="submit" value="submit"></th> -->
+    </tr>
+    </thead>
+    <tbody >
+      <tr  *ngFor="let item of data.unique_wines" (click)="navigate(item.eid,'wine/unique?unique_wine=')">
+
+        <td class="text-long">{{item.title}}</td>
+        <td >{{item.wine}}</td>
+        <td class="text-long">{{item.original_id}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.varietal}}</td>
+
+      </tr>
+    </tbody>
+  </table>

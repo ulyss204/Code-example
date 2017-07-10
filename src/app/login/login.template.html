@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="background" *ngIf="loading">
+    <div class="loader"></div>
+  </div>
+
+
+
+  <main id="content" class="widget-login-container" role="main">
+    <div class="row">
+      <div class="col-xl-4 col-md-6 col-xs-10 offset-xl-4 offset-md-3 offset-xs-1">
+        <img src="assets/img/tastemap_logo.png" alt="TasteMap" class="logo">
+        <h5 class="widget-login-logo animated fadeInUp">
+
+          TasteMap
+
+        </h5>
+        <section class="widget widget-login animated fadeInUp">
+          <header>
+            <h3 class="text-center">login</h3>
+          </header>
+          <div class="widget-body">
+        <!--    <p class="widget-login-info">
+              Use Facebook, Twitter or your email to sign in.
+            </p>
+            <p class="widget-login-info">
+              Don't have an account? Sign up now!
+            </p> -->
+             <form class="login-form mt-lg" (submit)="login($event, username.value, password.value)">
+              <div class="form-group">
+                <input type="text" class="form-control" id="username" #username placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <input class="form-control" id="password" #password type="password" placeholder="Password" required>
+              </div>
+              <div class="clearfix">
+                <div class="btn-toolbar float-xs-right m-t-1">
+                <!--  <button type="button" class="btn btn-secondary btn-sm" [routerLink]="['/signup']"  >Create an Account</button> -->
+                  <button type="submit" class="btn btn-secondary btn-sm" >Login</button>
+                </div>
+              </div>
+
+          <!--    <div class="row m-t-1">
+                <div class="col-md-6 push-md-6">
+                  <div class="clearfix">
+                    <div class="abc-checkbox widget-login-info float-xs-right">
+                      <input type="checkbox" id="checkbox1" value="1">
+                      <label for="checkbox1">Keep me signed in </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 pull-md-6">
+                  <a class="mr-n-lg" href="#">Trouble with account?</a>
+                </div>
+              </div> -->
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="page-footer">
+    2017 &copy; Tastemap Ltd.
+  </footer>
+</div>

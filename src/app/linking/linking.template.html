@@ -1,0 +1,77 @@
+<div class="widget-table-overflow">
+  <div class="pull-right">
+    <input type="text" placeholder="id" id="eid" [(ngModel)] = "inputId">
+    <button class="btn btn-success"  [routerLink]="['/app/labeling/linkings', inputId]">Submit</button>
+  </div>
+  <form (submit)="sendResult()">
+  <table class="table table-striped table-lg mt-lg mb-0">
+    <thead class="no-bd">
+    <tr>
+
+      <th>Winery</th>
+      <th class="text-long">Title</th>
+      <th >Type</th>
+      <th>Geo</th>
+      <th>Varietal</th>
+      <th>Designation</th>
+      <th >Source</th>
+
+      <th class="text-medium text-center"></th>
+    <!--  <th><input type="text" placeholder="id" class="text-medium"></th>
+      <th><input type="submit" value="submit"></th> -->
+    </tr>
+    </thead>
+    <tbody >
+      <tr class="unique" *ngIf="data">
+        <td>{{data.unique_wine_reference.winery}}</td>
+        <td >{{data.unique_wine_reference.title}}</td>
+        <td >{{data.unique_wine_reference.type}}</td>
+        <td>{{data.unique_wine_reference.country}}<br>
+      {{data.unique_wine_reference.region}}<br>
+      {{data.unique_wine_reference.subregion}}<br>
+      {{data.unique_wine_reference.appellation}}</td>
+      <td>{{data.unique_wine_reference.varietal}}</td>
+      <td>{{data.unique_wine_reference.designation}}</td>
+        <td class="text-xs-center">{{data.unique_wine_reference.source.charAt(0)}}</td>
+      </tr>
+
+      <tr *ngFor="let wine of wines;let i = index"  class="pointer">
+
+        <td *ngIf="wine.winery == data.unique_wine_reference.winery" class="similar">{{wine.winery}}</td>
+        <td *ngIf="wine.winery != data.unique_wine_reference.winery">{{wine.winery}}</td>
+        <td *ngIf="wine.title == data.unique_wine_reference.title" class="similar">{{wine.title}}</td>
+        <td *ngIf="wine.title != data.unique_wine_reference.title" >{{wine.title}}</td>
+        <td *ngIf="wine.type == data.unique_wine_reference.type" class="similar">{{wine.type}}</td>
+        <td *ngIf="wine.type != data.unique_wine_reference.type" >{{wine.type}}</td>
+        <td><span *ngIf="wine.country == data.unique_wine_reference.country" class="similar">{{wine.country}}</span>
+        <span *ngIf="wine.country != data.unique_wine_reference.country" >{{wine.country}}</span>
+        <span *ngIf="wine.region == data.unique_wine_reference.region" class="similar">{{wine.region}}</span>
+        <span *ngIf="wine.region != data.unique_wine_reference.region" >{{wine.region}}</span>
+        <span *ngIf="wine.subregion == data.unique_wine_reference.subregion" class="similar">{{wine.subregion}}</span>
+        <span *ngIf="wine.subregion != data.unique_wine_reference.subregion">{{wine.subregion}}</span>
+        <span *ngIf="wine.appellation == data.unique_wine_reference.appellation" class="similar">{{wine.appellation}}</span>
+        <span *ngIf="wine.appellation != data.unique_wine_reference.appellation">{{wine.appellation}}</span></td>
+        <td *ngIf="wine.varietal == data.unique_wine_reference.varietal" class="similar">{{wine.varietal}}</td>
+        <td *ngIf="wine.varietal != data.unique_wine_reference.varietal" >{{wine.varietal}}</td>
+        <td *ngIf="wine.designation == data.unique_wine_reference.designation" class="similar">{{wine.designation}}</td>
+        <td *ngIf="wine.designation != data.unique_wine_reference.designation" >{{wine.designation}}</td>
+        <td *ngIf="wine.source == data.unique_wine_reference.source" class="similar">{{wine.source.charAt(0)}}</td>
+        <td *ngIf="wine.source != data.unique_wine_reference.source" >{{wine.source.charAt(0)}}</td>
+
+        <td class="text-xs-center checkbox-style">
+          <div class="checkbox abc-checkbox">
+            <input id={{i}} type="checkbox" value={{wine.wineid}} *ngIf="links.indexOf(wine.wineid) == -1">
+            <input id={{i}} type="checkbox" value={{wine.wineid}} *ngIf="links.indexOf(wine.wineid) != -1" checked>
+            <label for={{i}}></label>
+          </div>
+        </td>
+
+      </tr>
+
+    </tbody>
+  </table>
+
+  <input type="submit" value="send" class="pull-right btn-primary btn">
+  </form>
+
+</div>

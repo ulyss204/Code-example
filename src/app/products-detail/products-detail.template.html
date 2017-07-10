@@ -1,0 +1,134 @@
+<div class="background" *ngIf="loading">
+  <div class="loader"></div>
+</div>
+<div class="container-wine">
+<div *ngIf="name">
+  <h1 class="page-title" *ngIf="name.entity.eid == productId && name.entity.eid">{{name.entity.winery}} - <span class="fw-semi-bold">{{name.entity.title}}</span></h1>
+  <ol class="breadcrumb">
+    <li *ngIf="name.entity.eid == productId && name.entity.country" class="breadcrumb-item font">{{name.entity.country}}</li>
+    <li *ngIf="name.entity.eid == productId && name.entity.region" class="breadcrumb-item font">{{name.entity.region}}</li>
+    <li *ngIf="name.entity.eid == productId && name.entity.subregion" class="breadcrumb-item font">{{name.entity.subregion}}</li>
+    <li *ngIf="name.entity.eid == productId && name.entity.appellation" class="breadcrumb-item font">{{name.entity.appellation}}</li>
+
+  </ol>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4 class="pull-left">Statistics</h4>
+    <ul class="list-inline pull-right ul">
+      <li (click)="week(1)" >week</li>
+      <li (click)="month(2)">month</li>
+      <li (click)="year(3)" class="underline">year</li>
+    </ul>
+  </div>
+  <h4 class="col-md-6 rank">Geo rankings</h4>
+</div>
+<div class="container-indicator">
+<div class="row marg " *ngFor="let item of globalArr">
+  <div class=" text-xs-left col-md-2 col-lg-2 col-sm-4 numb-center col-xs-4" *ngIf="item.hasOwnProperty('indicator_one')">
+    <div class="easy-pie-chart week "   *ngIf="isSetTab(1)"  data-percent="73">{{(item.indicator_one.week.value).toFixed(0)}}%<p class="text-xs-center text-pie">like this wine</p></div>
+  <div class="easy-pie-chart month "    *ngIf="isSetTab(2)" data-percent="73">{{(item.indicator_one.month.value).toFixed(0)}}%<p class="text-xs-center text-pie">like this wine</p></div>
+ <div class="easy-pie-chart year "    *ngIf="isSetTab(3) " data-percent="73">{{(item.indicator_one.year.value).toFixed(0)}}%<p class="text-xs-center text-pie">like this wine</p></div>
+
+  </div>
+  <div class="text-xs-center  col-md-2 col-lg-2 col-sm-4 col-xs-4" *ngIf="item.hasOwnProperty('indicator_two')">
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_two.week.value > 1000 && item.indicator_two.week.value < 1000000" data-percent="73">{{(item.indicator_two.week.value/1000).toFixed(1)}}K<div><span>/{{(item.indicator_two.week.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_two.week.value >= 1000000" data-percent="73">{{(item.indicator_two.week.value/1000000).toFixed(1)}}M<div><span>/{{(item.indicator_two.week.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_two.week.value <= 1000" data-percent="73">{{(item.indicator_two.week.value).toFixed(1)}}<div><span>/{{(item.indicator_two.week.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+   <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_two.month.value > 1000 && item.indicator_two.month.value < 1000000" data-percent="73">{{(item.indicator_two.month.value/1000).toFixed(1)}}K<div><span>/{{(item.indicator_two.month.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_two.month.value >= 1000000" data-percent="73">{{(item.indicator_two.month.value/1000000).toFixed(1)}}M<div><span>/{{(item.indicator_two.month.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_two.month.value <= 1000" data-percent="73">{{(item.indicator_two.month.value).toFixed(1)}}<div><span>/{{(item.indicator_two.month.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_two.year.value > 1000 && item.indicator_two.year.value < 1000000" data-percent="73">{{(item.indicator_two.year.value/1000).toFixed(1)}}K<div><span>/{{(item.indicator_two.year.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_two.year.value >= 1000000" data-percent="73">{{(item.indicator_two.year.value/1000000).toFixed(1)}}M<div><span>/{{(item.indicator_two.year.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_two.year.value <= 1000" data-percent="73">{{(item.indicator_two.year.value).toFixed(1)}}<div><span>/{{(item.indicator_two.year.maximum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">average score</p></div>
+
+  </div>
+  <div class=" text-xs-right col-md-2 col-lg-2 col-sm-4 numb-center col-xs-4" *ngIf="item.hasOwnProperty('indicator_three')">
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_three.week.value > 1000 && item.indicator_three.week.value < 1000000" data-percent="73">{{(item.indicator_three.week.value/1000).toFixed(1)}}K<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_three.week.value >= 1000000" data-percent="73">{{(item.indicator_three.week.value/1000000).toFixed(1)}}M<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart week "  *ngIf="isSetTab(1) && item.indicator_three.week.value <= 1000" data-percent="73">{{(item.indicator_three.week.value).toFixed(0)}}<p class="text-xs-center text-pie">wine reviews</p></div>
+   <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_three.month.value > 1000 && item.indicator_three.month.value < 1000000" data-percent="73">{{(item.indicator_three.month.value/1000).toFixed(1)}}K<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_three.month.value >= 1000000" data-percent="73">{{(item.indicator_three.month.value/1000000).toFixed(1)}}M<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart month "  *ngIf="isSetTab(2) && item.indicator_three.month.value <= 1000" data-percent="73">{{(item.indicator_three.month.value).toFixed(0)}}<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_three.year.value > 1000 && item.indicator_three.year.value < 1000000" data-percent="73">{{(item.indicator_three.year.value/1000).toFixed(1)}}K<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_three.year.value >= 1000000" data-percent="73">{{(item.indicator_three.year.value/1000000).toFixed(1)}}M<p class="text-xs-center text-pie">wine reviews</p></div>
+    <div class="easy-pie-chart year "  *ngIf="isSetTab(3) && item.indicator_three.year.value <= 1000" data-percent="73">{{(item.indicator_three.year.value).toFixed(0)}}<p class="text-xs-center text-pie">wine reviews</p></div>
+
+  </div>
+  <h4 class="col-md-6 rank-1">Geo rankings</h4>
+  <div class="text-xs-left  col-md-2 col-lg-2 col-sm-4 col-xs-4" *ngIf="item.ranking.hasOwnProperty('appellation')">
+    <div class="easy-pie-chart line"   data-percent="6">{{(item.ranking.appellation.value).toFixed(0)}}<div> <span>/{{(item.ranking.appellation.minimum).toFixed(0)}}</span></div> <p class="text-xs-center text-pie">appellation</p></div>
+
+  </div>
+  <div class=" text-xs-center col-md-2 col-lg-2 col-sm-4 col-xs-4" *ngIf="item.ranking.hasOwnProperty('region')">
+    <div class="easy-pie-chart line"  *ngIf="item.ranking.region.value && item.ranking.region.value > 1000" data-percent="7">{{(item.ranking.region.value/1000).toFixed(1)}}K<div><span>/{{(item.ranking.region.minimum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">region</p></div>
+    <div class="easy-pie-chart line"  *ngIf="item.ranking.region.value && item.ranking.region.value <= 1000" data-percent="7">{{(item.ranking.region.value).toFixed(0)}}<div><span>/{{(item.ranking.region.minimum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">region</p></div>
+
+  </div>  <div class="text-xs-right  col-md-2 col-lg-2 col-sm-4 col-xs-4" *ngIf="item.ranking.hasOwnProperty('world')">
+    <div class="easy-pie-chart "  *ngIf="item.ranking.region.value && item.ranking.world.value > 1000 && item.ranking.world.value < 1000000" data-percent="6">{{(item.ranking.world.value/1000).toFixed(1)}}K<div><span>/{{(item.ranking.world.minimum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">country</p></div>
+    <div class="easy-pie-chart "  *ngIf="item.ranking.region.value && item.ranking.world.value >= 1000000 " data-percent="6">{{(item.ranking.world.value/1000000).toFixed(1)}}M<div><span>/{{(item.ranking.world.minimum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">country</p></div>
+    <div class="easy-pie-chart "  *ngIf="item.ranking.region.value && item.ranking.world.value <= 1000" data-percent="6">{{(item.ranking.world.value).toFixed(0)}}<div><span>/{{(item.ranking.world.minimum).toFixed(0)}}</span></div><p class="text-xs-center text-pie">country</p></div>
+
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="pull-left">World sentiment</h4>
+    <ul class="list-inline pull-right ul switcher">
+      <li (click)="composite()" class="underline">composite</li>
+      <li (click)="popularity()" >popularity</li>
+      <li (click)="rating()" >rating</li>
+    </ul>
+  </div>
+
+  <!--  <ul class="list-inline pull-right">
+      <li><a  >local</a></li>
+      <li><a href="">world</a></li>
+      <li><a href="">country</a></li>
+    </ul>-->
+
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <!-- minimal widget consist of .widget class. note bg-transparent - it can be any background like bg-gray,
+    bg-primary, bg-white -->
+
+    <section class="widget bg-transparent">
+      <!-- .widget-body is a mostly semantic class. may be a sibling to .widget>header or .widget>footer -->
+      <div class="widget-body" >
+        <!-- for this particular example we also need to preload us map, as this is mapael's extension -->
+        <div class="mapael" geo-locations-widget *ngIf="geo">
+
+        <!--  <div class="stats">
+            <h6 class="text-white m-t-1">GEO-LOCATIONS</h6>
+            <p class="h3 text-warning no-margin">
+              <strong number-animate>1 656 843</strong>
+              <i class="fa fa-map-marker"></i>
+            </p>
+          </div>-->
+          <div class="map">
+            <span>Alternative content for the map</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="row row-container">
+  <div class=" col-xs-12 col-md-6" *ngFor="let item of datum" >
+    <h4 class="text-hist">Vintage sentiment</h4>
+    <div nvd3-chart [chart]="nvd32Chart" [datum]="item" id="chart">
+      <svg ></svg>
+    </div>
+  </div>
+  <div class=" col-xs-12 col-md-6" *ngFor="let item of datumMonth" >
+    <h4 class="text-hist">Rating frequency</h4>
+    <div nvd3-chart [chart]="monthChart" [datum]="item" id="chartMonth">
+      <svg ></svg>
+    </div>
+  </div>
+</div>
+</div>

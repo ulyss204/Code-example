@@ -1,0 +1,106 @@
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../ui-elements/notifications/notifications.style";
+@import "../scss/variables";
+
+/***********************************/
+/**             LOGIN             **/
+/***********************************/
+
+.login-page{
+  background-color: $gray-semi-lighter;
+}
+.logo{
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+}
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  background-color: #ccc;
+  z-index: 2;
+}
+.loader {
+  position: absolute;
+  z-index: 2;
+  top: calc( 50% - 60px);
+  left: calc(50% - 60px);
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid $sidebar-bg-color; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-page .page-footer {
+  margin-bottom: 25px;
+  font-size: $font-size-mini;
+  color: $text-muted;
+  text-align: center;
+  @media (min-height: 600px) {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+.widget-login-container{
+  padding-top: 10%;
+}
+
+.widget-login-logo{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: $font-weight-normal;
+  .fa-circle{
+    font-size: 13px;
+    margin: 0 20px;
+  }
+}
+
+.widget-login{
+  padding: 30px;
+
+  > header{
+    h1,h2,h3,h4,h5,h6{
+      font-weight: $font-weight-normal;
+      text-align: center;
+    }
+  }
+}
+
+.widget-login-info{
+  font-size: $font-size-mini;
+  color: #888;
+  margin-top: 1px;
+  margin-bottom: 0;
+  text-align: center;
+
+  &.abc-checkbox {
+    margin-left: -25px;
+  }
+}
+
+.login-form{
+  .form-control{
+    font-size: $font-size-mini;
+    border: none;
+    background-color: $gray-lighter;
+    &:focus{
+      background-color: $gray-semi-lighter;
+    }
+  }
+}

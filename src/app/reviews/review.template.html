@@ -1,0 +1,17 @@
+<h1><span class="tag tag-success" *ngIf="data.eid">Unique</span><span class="tag tag-danger" *ngIf="data.wineid">Not unique</span>{{data.title}}</h1>
+<h3>{{data.region}}</h3>
+<div class="table-responsive">
+  <table class="table table-hover" *ngIf="data.eid">
+    <thead>
+    <tr>
+      <th>Links</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of data.linked_wine_references" (click)="navigate(item.wineid,'wine?wine_id=')">
+      <td >{{item.title}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
